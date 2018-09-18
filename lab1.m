@@ -152,8 +152,11 @@ figure; image(gif); truesize;
 % Now use the command to associate with the new figure the color map loaded along with cwheel_mapped.gif.
 colormap(cmap_gif); title('gif');
 
-% to associate with the new figure the color map loaded along with cwheel_mapped.gif.Now what
-% do you see? How does it compare to the first figure you generated in part 2a?
+% Now what do you see? How does it compare to the first figure you generated in part 2a?
+% Answer: The image is displayed correctly using the colormap compared to
+% the gif.
+
+
 
 
 %% (c) Create a new color map, say cmap2, from the old one, cmap, as follows:
@@ -181,7 +184,7 @@ colormap(cmap2);
 
 % Describe the differences in appearance between cwheel.bmp and
 % cwheel_mapped.gif.
-figure; image(bmp); truesize; title('bmp');mp
+figure; image(bmp); truesize; title('bmp');
 
 % Based on their relative appearances, describe how
 % gradual changes in color are implemented (or approximated) by the
@@ -267,9 +270,9 @@ figure; image(merzouga+128); truesize;
 % Answer: (TODO).
 
 
-%% 3(c) If your image has different dimensions from cwheel.bmp, cut out 
+% (c) If your image has different dimensions from cwheel.bmp, cut out 
 % pieces of one or both images (using native Matlab indexing) so that 
-% sthey are both have exaactly the same dimensions.
+% sthey are both have exactly the same dimensions.
 
 %  Now read cwheel.bmp into variable S in Matlab. 
 S = imread('cwheel.bmp');
@@ -278,7 +281,7 @@ S = imread('cwheel.bmp');
 summed = merzouga+S;
 figure; image(summed); truesize;
 % Answer: because int8 is [0 255]. 256 is truncated to 255.
-a
+
 % and the product,J.* S. (Note the ?.*?. 
 % How is that different from ?*??) Describe the results.
 figure; image(merzouga.*S); truesize;
@@ -323,7 +326,19 @@ fprintf("max(summed(:)) = %d", max(summed(:)));
 % run the function on it. Note the elapsed time.
 merz_divided_loop = DivIbyConstLoops(merzouga, 2); % 0.043690 seconds.
 merz_divided_matmul = DivIbyConstNoLoops(merzouga, 2); % 0.001388 seconds.
-
+function divved = DivIbyConstLoops(image, constant)
+    tic
+    [nrows, ncols, nbands] = size(image);
+    for r = 1:nrows
+        for c = 1:ncols
+            for b = 1:nbands
+                image(r, c, b) = uint8(double(image(r, c, b))/constant);
+            end
+        end
+    end
+    toc
+    divved = image;
+end
 
 %% (b) Write a function that divides every pixel in the image by a 
 % constant c without using loops. This is particularly simple,

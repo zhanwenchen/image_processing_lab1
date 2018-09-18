@@ -1,0 +1,1538 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{c+c1}{\PYZsh{} Import and initialize Matlab\PYZsq{}s Python API because lab1 is Matlab\PYZhy{}specific.}
+          \PY{c+c1}{\PYZsh{} NOTE: this takes a while (also I/O blocking)}
+          \PY{k+kn}{import} \PY{n+nn}{matlab}\PY{n+nn}{.}\PY{n+nn}{engine}
+          \PY{n}{eng} \PY{o}{=} \PY{n}{matlab}\PY{o}{.}\PY{n}{engine}\PY{o}{.}\PY{n}{start\PYZus{}matlab}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{c+c1}{\PYZsh{} Load python dependencies}
+          \PY{k+kn}{import} \PY{n+nn}{sys}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{c+c1}{\PYZsh{} Redirect Matlab stdout and stderr to buffers}
+          
+          \PY{k+kn}{import} \PY{n+nn}{io}
+          \PY{n}{out} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{StringIO}\PY{p}{(}\PY{p}{)}
+          \PY{n}{err} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{StringIO}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}\PY{p}{:}
+              \PY{n}{out}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{out}\PY{o}{.}\PY{n}{truncate}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+              
+              \PY{n}{err}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{err}\PY{o}{.}\PY{n}{truncate}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Image Classes
+\end{enumerate}
+
+1(a) Load a truecolor image of your choice into a matrix I into Matlab
+\% using imread.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{I = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{pamukkale.jpg}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(I); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1a\PYZus{}pamukkale.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1(a) Pamukkale, Turkey. ©Paul Williams 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} What\PYZsq{}s the image\PYZsq{}s class?}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(a) class of I is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, class(I));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} What\PYZsq{}s its size?}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(a) size of I is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, mat2str(size(I)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} How many bands does it have?}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(a) the number of bands of I is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, size(I, 3));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} Find its minimum and maximum values using}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(a) min of I is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, min(I(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(a) max of I is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(I(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+1(a) class of I is uint8
+1(a) size of I is [536 858 3]
+1(a) the number of bands of I is 3
+1(a) min of I is 0
+1(a) max of I is 255
+
+    \end{Verbatim}
+
+    1(b)
+
+Convert the image into a 64-bit floating-point number array using the
+command
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D = double(I);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} and check its class.}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(b) class of D is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, class(D));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Find the maximum and minimum values of D.}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(b) min o D is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, min(D(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(b) max of D is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(D(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1(b) class of D is double
+1(b) min o D is 0
+1(b) max of D is 255
+
+    \end{Verbatim}
+
+    1(c)
+
+Now display D using
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(D); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1c\PYZus{}doubled.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1(c) Doubled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    1(c)
+
+What happens? Read the Matlab help pages on images as necessary to
+understand what's going on.
+
+\hypertarget{answer-the-image-appears-almost-all-white-with-some-cyan.-behind-the-scenes-when-the-image-class-is-double-matlab-only-accepts-float-values-between-0-and-1.-any---in-this-case-almost-all---values-above-1.0-are-set-to-1.-the-reason-that-the-image-displayed-have-mostly-cyan-is-that-in-those-pixel-locations-the-red-values-were-0-to-start-with-while-the-blue-and-green-were-over-1-and-thus-set-to-1.-everywhere-else-the-values-have-been-set-to-1-1-1-thus-appearing-white.}{%
+\paragraph{Answer: The image appears almost all white with some cyan.
+Behind the scenes, when the image class is double, Matlab only accepts
+float values between 0 and 1. Any - in this case almost all - values
+above 1.0 are set to 1. The reason that the image displayed have mostly
+cyan is that in those pixel locations, the red values were 0 to start
+with, while the blue and green were over 1 and thus set to 1. Everywhere
+else, the values have been set to (1, 1, 1) thus appearing
+white.}\label{answer-the-image-appears-almost-all-white-with-some-cyan.-behind-the-scenes-when-the-image-class-is-double-matlab-only-accepts-float-values-between-0-and-1.-any---in-this-case-almost-all---values-above-1.0-are-set-to-1.-the-reason-that-the-image-displayed-have-mostly-cyan-is-that-in-those-pixel-locations-the-red-values-were-0-to-start-with-while-the-blue-and-green-were-over-1-and-thus-set-to-1.-everywhere-else-the-values-have-been-set-to-1-1-1-thus-appearing-white.}}
+
+    1(c)
+
+What arithmetic operation must you perform on D to make it displayable
+with image(D)? That is, replace D with an arithmetically altered version
+of D - i.e.~D = f(D) where f() s some arithmetic operation like
+multiplicatin or division by a constant. te that as you experiment with
+this, if you replace D with the wrong thing, you will have to execute D
+= double(I); to get it back.
+
+\hypertarget{answer-d-d255}{%
+\paragraph{Answer: D = D/255}\label{answer-d-d255}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D = D/255;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{c+c1}{\PYZsh{} Find the maximum and minimum values of your altered D.}
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(c) min o corrected D is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, min(D(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(c) max of corrected D is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(D(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(c) class of corrected D is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, class(D));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(c) size of corrected D is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, mat2str(size(D)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1(c) min o corrected D is 0
+1(c) max of corrected D is 1
+1(c) class of corrected D is double
+1(c) size of corrected D is [536 858 3]
+
+    \end{Verbatim}
+
+    1(d)
+
+Once you are able to run
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(D); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1d\PYZus{}doubled\PYZus{}scaled.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1(d) Doubled but Scaled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} and get an image that looks correct, convert D back to 8 bits per pixel by entering}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{U8 = uint8(D);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(U8); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1d\PYZus{}inted.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1(d) Inted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    What do you see?
+
+\hypertarget{answer-the-displayed-image-seems-all-black.}{%
+\paragraph{Answer: The displayed image seems all
+black.}\label{answer-the-displayed-image-seems-all-black.}}
+
+    1(d) Find the maximum and minimum values of U8.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(d) min of U8 is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, min(U8(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{1(d) max of U8 is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(U8(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1(d) min of U8 is 0
+1(d) max of U8 is 1
+
+    \end{Verbatim}
+
+    1(d) What has the conversion done?
+
+\hypertarget{answer-the-conversion-rounded-the-floats-between-0-and-1-to-integers-0-and-1.-the-image-remains-8-bit-with-3-bands-so-matlab-treats-it-as-if-it-were-still-a-color-image-with-a-range-of-integers-0-255.-however-1-looks-similar-to-0-so-that-the-image-looks-all-black-though-it-isnt.}{%
+\paragraph{Answer: The conversion rounded the floats between 0 and 1 to
+integers 0 and 1. The image remains 8-bit (with 3 bands) so Matlab
+treats it as if it were still a color image with a range of (integers)
+{[}0, 255{]}. However, 1 looks similar to 0 so that the image looks all
+black though it
+isn't.}\label{answer-the-conversion-rounded-the-floats-between-0-and-1-to-integers-0-and-1.-the-image-remains-8-bit-with-3-bands-so-matlab-treats-it-as-if-it-were-still-a-color-image-with-a-range-of-integers-0-255.-however-1-looks-similar-to-0-so-that-the-image-looks-all-black-though-it-isnt.}}
+
+    1(d) Now do this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(U8*255); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1d\PYZus{}inted\PYZus{}255.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1(d) Inted to 255}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    1(d)
+
+What if any colors do you see?
+
+\hypertarget{answer-blue-green-red-yellow-cyan-magenta-white-black.}{%
+\paragraph{Answer: Blue, green, red, yellow, cyan, magenta, white,
+black.}\label{answer-blue-green-red-yellow-cyan-magenta-white-black.}}
+
+Why would a binary image have more colors than just black and white?
+
+\hypertarget{answer-different-combinations-23-8-of-0s-and-255s-in-three-color-locations-can-still-produce-rgb-and-their-basic-combinations-cyan-magenta-yellow-plus-white-and-black.}{%
+\paragraph{Answer: Different combinations (2\^{}3 = 8) of 0s and 255s in
+three color locations can still produce RGB and their basic combinations
+(cyan, magenta, yellow), plus white and
+black.}\label{answer-different-combinations-23-8-of-0s-and-255s-in-three-color-locations-can-still-produce-rgb-and-their-basic-combinations-cyan-magenta-yellow-plus-white-and-black.}}
+
+    1(e)
+
+In your own words, write out a short explanation of the differences
+between images of class uint8 and double.
+
+\hypertarget{answer-double-images-are-more-accomodating-in-representating-uint8-and-uint16-etc.-each-pixel-location-needs-to-have-a-float-value-between-0-and-1.-in-contrast-uint8-images-are-specific-and-have-integer-values-between-0-and-255.}{%
+\paragraph{Answer: double images are more accomodating in representating
+uint8 and uint16, etc. Each pixel location needs to have a float value
+between 0 and 1. In contrast, uint8 images are specific and have integer
+values between 0 and
+255.}\label{answer-double-images-are-more-accomodating-in-representating-uint8-and-uint16-etc.-each-pixel-location-needs-to-have-a-float-value-between-0-and-1.-in-contrast-uint8-images-are-specific-and-have-integer-values-between-0-and-255.}}
+
+Explain what it takes to convert between the formats without losing the
+intensities in the images.
+
+\hypertarget{answer-in-order-to-convert-uint8-intensity-images-to-double-the-integers-first-need-to-be-converted-to-double.-then-they-need-to-be-scaled-by-the-max-value-255.-in-reverse-double-images-need-to-be-scaled-up-and-then-rounded-to-0-255.}{%
+\paragraph{Answer: In order to convert uint8 intensity images to double,
+the integers first need to be converted to double. Then they need to be
+scaled by the max value (255). In reverse, double images need to be
+scaled up and then rounded to {[}0,
+255{]}.}\label{answer-in-order-to-convert-uint8-intensity-images-to-double-the-integers-first-need-to-be-converted-to-double.-then-they-need-to-be-scaled-by-the-max-value-255.-in-reverse-double-images-need-to-be-scaled-up-and-then-rounded-to-0-255.}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Loading, displaying, and saving color mapped (aka indexed) images.
+\end{enumerate}
+
+2(a) Load chweel\_mapped.gif and its color map into a matrix in Matlab.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[gif cmap\PYZus{}gif] = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{cwheel\PYZus{}mapped.gif}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    2(a) Use the class function to determine the type of the image
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{2(a) class of gif is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, class(gif));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2(a) class of gif is uint8
+
+    \end{Verbatim}
+
+    2(a) Use size to determine its dimensions
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{2(a) size of gif is }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, mat2str(size(gif)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2(a) size of gif is [600 800]
+
+    \end{Verbatim}
+
+    2(a)
+
+Also, note the file size in bytes of cwheel\_mapped.gif. How does this
+compare to the dimensions and file size of cwheel.bmp Answer: bmp is
+1.4MB, but git is 137KB.
+
+imread returns two data structures. The first one is a matrix containing
+the image. The second is the image?s color map. Think of the color map
+as a palette of colors arranged in a N ï¿½ 3 table, where N is the
+number of colors. The value at a pixel in the image is not an intensity,
+but an index into the color map ? the number of the row that contains
+the color vector for that pixel.
+
+How many colors are in the palette for cwheel\_mapped.gif? Note:
+Typically all x-bit images have 256 colors.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{2(a) There are }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ colors in the palette for cwheel\PYZus{}mapped.gif}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, size(cmap\PYZus{}gif, 1));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2(a) There are 256 colors in the palette for cwheel\_mapped.gif
+
+    \end{Verbatim}
+
+    2(b)
+
+Use
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(gif); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2b\PYZus{}gif\PYZus{}yellow.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(b)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(b)
+
+What do you see? Describe its appearance. \#\#\#\# Answer: Answer: It's
+desplayed incorrectly - mostly yellow and blue.
+
+Now use the command to associate with the new figure the color map
+loaded along with cwheel\_mapped.gif.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(cmap\PYZus{}gif); title(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{gif}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2b\PYZus{}gif\PYZus{}color.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(b)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(b)
+
+Now what do you see? How does it compare to the first figure you
+generated in part 2a?
+
+\hypertarget{answer-the-image-is-displayed-correctly-using-the-colormap-compared-to-the-gif.}{%
+\paragraph{Answer: The image is displayed correctly using the colormap
+compared to the
+gif.}\label{answer-the-image-is-displayed-correctly-using-the-colormap-compared-to-the-gif.}}
+
+    2(c)
+
+Create a new color map, say cmap2, from the old one, cmap, as follows
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp = mean(cmap\PYZus{}gif,2);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cmap2 = [temp temp temp];}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    2(c)
+
+What did this just do?
+
+\hypertarget{answer-the-first-step-took-the-mean-among-the-3-bands-of-each-color-in-the-palette-of-the-image-and-constructed-another-palette-setting-3-bands-to-the-average-color-intensity-of-the-original-palette.-if-the-three-bands-are-the-same-its-just-grey-by-definition.}{%
+\paragraph{Answer: The first step took the mean among the 3 bands of
+each color in the palette of the image and constructed another palette
+setting 3 bands to the average color intensity of the original palette.
+If the three bands are the same, it's just grey by
+definition.}\label{answer-the-first-step-took-the-mean-among-the-3-bands-of-each-color-in-the-palette-of-the-image-and-constructed-another-palette-setting-3-bands-to-the-average-color-intensity-of-the-original-palette.-if-the-three-bands-are-the-same-its-just-grey-by-definition.}}
+
+    2(c)
+
+Select the figure that displays cwheel\_mapped.gif to which you did not
+did not apply a color map, and apply the new color map using
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(cmap2);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2b\PYZus{}gif\PYZus{}grey.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now what do you see?
+
+\hypertarget{answer-the-gif-has-been-converted-to-grayscale.}{%
+\paragraph{Answer: The gif has been converted to
+grayscale.}\label{answer-the-gif-has-been-converted-to-grayscale.}}
+
+    2(d)
+
+Now you are going to compare the 24-bit image, cwheel.bmp, with its
+color mapped version, cwheel\_mapped.gif, displayed with its original
+color map ? the one you loaded along with the image in part 2a.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[bmp cmap\PYZus{}bmp] = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{cwheel.bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    2(d)
+
+Describe the differences in appearance between cwheel.bmp and
+cwheel\_mapped.gif.
+
+\hypertarget{answer-cwheel.bmp-seems-much-smoother-in-color-transition-than-cwheel_mapped.}{%
+\paragraph{Answer: cwheel.bmp seems much smoother in color transition
+than
+cwheel\_mapped.}\label{answer-cwheel.bmp-seems-much-smoother-in-color-transition-than-cwheel_mapped.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(bmp); truesize; title(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2b\PYZus{}gif\PYZus{}color\PYZus{}bmp.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(d)
+
+Based on their relative appearances, describe how gradual changes in
+color are implemented (or approximated) by the color mapped image.
+
+\hypertarget{answer-colormapped-indexed-images-are-based-on-the-true-color-images-but-binned-into-a-histogram-of-256-colors-instead-of-2563-possible-color-combinations-in-the-truecolor-image.-there-is-then-a-lookup-table-for-the-color-mapping.-the-noise-in-the-gif-seems-to-stem-from-cutoffs-from-adjacent-color-bins.}{%
+\paragraph{Answer: Colormapped (``Indexed'') images are based on the
+true color images but binned into a histogram of 256 colors instead of
+256\^{}3 possible color combinations in the truecolor image. There is
+then a lookup table for the color mapping. The noise in the gif seems to
+stem from cutoffs from adjacent color
+bins.}\label{answer-colormapped-indexed-images-are-based-on-the-true-color-images-but-binned-into-a-histogram-of-256-colors-instead-of-2563-possible-color-combinations-in-the-truecolor-image.-there-is-then-a-lookup-table-for-the-color-mapping.-the-noise-in-the-gif-seems-to-stem-from-cutoffs-from-adjacent-color-bins.}}
+
+    2(d)
+
+Like you did in Homework 1, use Matlab ?s native indexing to cut a 64
+ï¿½ 64 sub-image out of the original truecolor image. Select a region
+where there is a smooth change in intensity or color.s
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop = bmp(160:160+64, 300:300+64, :);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    Explain how you did this. Write down the coordinates you chose. Use the
+Matlab function, imresize, to enlarge the small image to 512 ï¿½ 512.
+Use the nearest neighbor mode. Display the new image in a figure window.
+The individual pixels should be clearly, distinctly visible as squares.
+Use the imwrite(ï¿½) function to save the enlarged image as a .bmp file.
+
+\hypertarget{answer-the-point-i-chosed-was-160-300.-i-chosed-it-by-selecting-the-middle-ball-which-is-roughly-in-the-center-of-the-image.}{%
+\paragraph{Answer: The point I chosed was (160, 300). I chosed it by
+selecting the middle ball, which is roughly in the center of the
+image.}\label{answer-the-point-i-chosed-was-160-300.-i-chosed-it-by-selecting-the-middle-ball-which-is-roughly-in-the-center-of-the-image.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}175}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}bmp = imresize(crop, [512 512]);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(crop\PYZus{}resized\PYZus{}bmp); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imwrite(crop\PYZus{}resized\PYZus{}bmp, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}bmp.bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}bmp.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(d) truecolor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Do exactly the same thing with cwheel\_mapped.gif using the same image
+coordinates, so that you get exactly the same regions out of both
+images. Save the enlarged region as a BMP image with the original color
+map from cwheel\_mapped.gif to include in your report. If the enlarged
+region of the colormapped image is in array J512, then this will save
+the image with the colormap as a .bmp file named
+cwheel\_mapped\_detail.bmp:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}177}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop = gif(160:160+64, 300:300+64, :);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}gif = imresize(crop, [512 512]);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(crop\PYZus{}resized\PYZus{}gif); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(cmap\PYZus{}gif);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imwrite(crop\PYZus{}resized\PYZus{}gif, cmap\PYZus{}gif, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}gif.bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crop\PYZus{}resized\PYZus{}gif.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(d) colormapped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(e)
+
+It may appear that the color mapped image is inferior to the truecolor
+version. That is usually so for images that are color photographs. But
+if the image is a graphic with no more than the number of colors that
+can be displayed with an indexed image then the indexed (color mapped)
+version may be better, depending on the file format in which it is
+stored.
+
+The following image illustrates another situation in which a color
+mapping can be useful. Download plume\_gs.bmp from Blackboard, read and
+display it and its color map in Matlab.
+
+This image of a smoke plume is such that the intensity (grayscale) of
+the image at a pixel is directly proportional to the density of the
+smoke at the corresponding location in space. Display the image in two
+other figure windows so that you have three copies of it.
+
+Apply the the color map you loaded with the image to one of figures.
+Apply the jet(256) color map to the second figure.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[plume, cmap\PYZus{}plume] = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{plume\PYZus{}gs.bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(plume); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(plume); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(cmap\PYZus{}plume);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(plume); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(jet(256));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          
+          \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2e\PYZus{}plume\PYZus{}no\PYZus{}map.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(e) plume without colormap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2e\PYZus{}plume\PYZus{}map.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(e) plume with jet colormap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2e\PYZus{}plume\PYZus{}jet\PYZus{}256.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(e) plume with colormap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(e) Can you see structures in the plume that were not visible before?
+If so, describe them.
+
+\hypertarget{answe-yes.-the-grayscale-colormap-shows-the-inner-structures-with-different-intensities-while-the-jet256-colormap-shows-even-more-distinct-structures-with-different-shades-of-blue-green-and-red.}{%
+\paragraph{Answe: Yes. The grayscale colormap shows the inner structures
+with different intensities, while the jet(256) colormap shows even more
+distinct structures with different shades of blue, green, and
+red.}\label{answe-yes.-the-grayscale-colormap-shows-the-inner-structures-with-different-intensities-while-the-jet256-colormap-shows-even-more-distinct-structures-with-different-shades-of-blue-green-and-red.}}
+
+Apply a random color map rand(256,3) to the third figure. Repeat
+colormap(rand(256,3)) a few times until you get an image with good
+contrast.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(plume); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{colormap(rand(256, 3));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2e\PYZus{}plume\PYZus{}words.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2(e) plume with random colormap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    2(e)
+
+Again, can you see structures that were not before visible?
+
+\hypertarget{answer-yes.-the-words-all-your-base-are-belong-to-me}{%
+\paragraph{Answer: Yes. The words ``all your base are belong to
+me''}\label{answer-yes.-the-words-all-your-base-are-belong-to-me}}
+
+    2(e)
+
+Save the smoke plume image with the jet(256) color map and save it with
+the random color map for inclusion in your report.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Arithmetic operations on images and sub-images.
+\end{enumerate}
+
+3(a) Acquire a 24-bit image about the same size as cwheel.bmp that has a
+wide range of intensities (dark to light). Use an image of your choice,
+but not cwheel.bmp.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{merzouga = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ZhanwenChenMerzouga.JPG}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(merzouga); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3a\PYZus{}merzouga.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(a) Merzouga, Morocco. ©Zhanwen Chen 2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(b) Assume matrix J contains your image.
+
+3(b)(i)
+
+Display J/2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(merzouga/2); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3b\PYZus{}i\PYZus{}merzouga\PYZus{}half.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(b)(i)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(b)(i)
+
+\hypertarget{answer-the-halved-image-is-much-darker-for-brighter-pixels-and-a-little-darker-for-already-dark-ones.}{%
+\paragraph{Answer: The halved image is much darker for brighter pixels
+and a little darker for already dark
+ones.}\label{answer-the-halved-image-is-much-darker-for-brighter-pixels-and-a-little-darker-for-already-dark-ones.}}
+
+    3(b)(ii)
+
+Display J*2,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(merzouga*2); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3b\PYZus{}ii\PYZus{}merzouga\PYZus{}double.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(b)(ii)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(b)(ii)
+
+\hypertarget{answer-the-doubled-image-is-much-brighter-for-brighter-pixels-and-a-little-brighter-for-already-bright-ones.}{%
+\paragraph{Answer: The doubled image is much brighter for brighter
+pixels and a little brighter for already bright
+ones.}\label{answer-the-doubled-image-is-much-brighter-for-brighter-pixels-and-a-little-brighter-for-already-bright-ones.}}
+
+    3(b)(iii)
+
+Display J-128
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(merzouga\PYZhy{}128); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3b\PYZus{}iii\PYZus{}merzouga\PYZus{}minus.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(b)(iii)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(b)(iii)
+
+\hypertarget{answer-the-minus-image-is-evenly-darker-for-all-pixels.}{%
+\paragraph{Answer: The minus image is evenly darker for all
+pixels.}\label{answer-the-minus-image-is-evenly-darker-for-all-pixels.}}
+
+    3(b)(iv)
+
+Display J+128
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(merzouga+128); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3b\PYZus{}iv\PYZus{}merzouga\PYZus{}plus.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(b)(iv)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(b)(iii)
+
+\hypertarget{answer-the-minus-image-is-evenly-brighter-for-all-pixels.}{%
+\paragraph{Answer: The minus image is evenly brighter for all
+pixels.}\label{answer-the-minus-image-is-evenly-brighter-for-all-pixels.}}
+
+    3(b)
+
+What happens when the image is of class uint8, and the result of
+arithmetic on a pixel would yield a negative value? What happens when
+the result is greater than 255?
+
+\hypertarget{answer-because-of-the-uint8-class-negative-values-are-truncated-to-0-and-all-values-greater-than-255-are-truncated-to-255.}{%
+\paragraph{Answer: Because of the uint8 class, negative values are
+truncated to 0 and all values greater than 255 are truncated to
+255.}\label{answer-because-of-the-uint8-class-negative-values-are-truncated-to-0-and-all-values-greater-than-255-are-truncated-to-255.}}
+
+    3(c)
+
+If your image has different dimensions from cwheel.bmp, cut out pieces
+of one or both images (using native Matlab indexing) so that sthey are
+both have exaactly the same dimensions.
+
+Now read cwheel.bmp into variable S in Matlab.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S = imread(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{cwheel.bmp}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    3(c)
+
+Form and display the sum, J+S, and the product,J.* S.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summed = merzouga+S;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{product = merzouga.*S;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(summed); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure; image(product); truesize;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set(gca,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,[0 0 1 1],}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{units}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{normalized}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Visible}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3(c)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3c\PYZus{}merzouga\PYZus{}plus\PYZus{}s.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{summed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3c\PYZus{}merzouga\PYZus{}times\PYZus{}s.bmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{product}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.88}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3(c)
+
+Describe the results.
+
+\hypertarget{answer-the-sum-image-retains-mostly-the-color-profile-of-the-cwheel-image.-however-there-are-white-spots-where-the-user-provided-image-merzouga-is-most-bright.-as-for-the-product-image-it-became-a-unary-image-where-all-pixel-values-seem-to-be-exactly-255-resulting-in-only-four-colors-cyan-magenta-yellow-and-white.}{%
+\paragraph{Answer: The sum image retains mostly the color profile of the
+cwheel image. However, there are white spots where the user-provided
+image (`merzouga') is most bright. As for the product image, it became a
+unary image where all pixel values seem to be exactly 255, resulting in
+only four colors: cyan, magenta, yellow, and
+white.}\label{answer-the-sum-image-retains-mostly-the-color-profile-of-the-cwheel-image.-however-there-are-white-spots-where-the-user-provided-image-merzouga-is-most-bright.-as-for-the-product-image-it-became-a-unary-image-where-all-pixel-values-seem-to-be-exactly-255-resulting-in-only-four-colors-cyan-magenta-yellow-and-white.}}
+
+    3(c)
+
+What is the maximum possible value of a sum of two images?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}double = double(merzouga) + double(S); fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{3(c) max(sum\PYZus{}double(:)) = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(sum\PYZus{}double(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3(c) max(sum\_double(:)) = 510
+
+    \end{Verbatim}
+
+    How might you adjust the sum so that the maximum fits in an 8-bit image?
+
+\hypertarget{answer-convert-it-to-double-divide-by-its-max-510-and-convert-back-to-uint8.}{%
+\paragraph{Answer: convert it to double, divide by its max (510), and
+convert back to
+uint8.}\label{answer-convert-it-to-double-divide-by-its-max-510-and-convert-back-to-uint8.}}
+
+What is the maximum possible value of a product of two images?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{product\PYZus{}double = double(merzouga).* double(S); fprintf(}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{3(c) max(product\PYZus{}double(:)) = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{, max(product\PYZus{}double(:)));}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3(c) max(product\_double(:)) = 65025
+
+    \end{Verbatim}
+
+    How might you adjust the product so that the maximum fits in an 8-bit
+image?
+
+\hypertarget{answer-convert-it-to-double-divide-by-its-max-65025-and-convert-back-to-uint8.}{%
+\paragraph{Answer: convert it to double, divide by its max (65025), and
+convert back to
+uint8.}\label{answer-convert-it-to-double-divide-by-its-max-65025-and-convert-back-to-uint8.}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Looping in Matlab
+\end{enumerate}
+
+If you are not familiar with Matlab functions, then please read the help
+pages for ``function,'' in ``MATLAB \textgreater{} Programming Scripts
+and Functions \textgreater{} Functions \textgreater{} Function Basics.''
+
+Matlab provides a way to time the execution of its code, the pair of
+functions, tic and toc. They are placed in a function before and after
+the code to be timed. For example
+
+J = DivIbyConstLoops(I,c) tic \% code to time goes here toc end
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Write a function that divides every pixel in the image by a constant c
+  using loops. That is use for statements to make 3 nested loops. For
+  example, have the the first loop index the bands. Inside that loop
+  index across the columns. And inside that, loop down the rows. Any
+  permutation of the order is OK but there need to be three loops. Note
+  that in the function before the loops you will need to use the size
+  function to get the dimensions of the image.
+\end{enumerate}
+
+Place tic on a line before the first for statement. Place toc on a line
+after all three loops (the last of 3 end statements). Load an image and
+run the function on it. Note the elapsed time.
+
+    \hypertarget{matlab-function}{%
+\paragraph{Matlab function:}\label{matlab-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function divved = DivIbyConstLoops(image, constant)}
+\NormalTok{    tic}
+\NormalTok{    [nrows, ncols, nbands] = size(image);}
+\NormalTok{    for r = }\FloatTok{1}\NormalTok{:nrows}
+\NormalTok{        for c = }\FloatTok{1}\NormalTok{:ncols}
+\NormalTok{            for b = }\FloatTok{1}\NormalTok{:nbands}
+\NormalTok{                image(r, c, b) = uint8(double(image(r, c, b))/constant);}
+\NormalTok{            end}
+\NormalTok{        end}
+\NormalTok{    end}
+\NormalTok{    toc}
+\NormalTok{    divved = image;}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+    4(b)
+
+Write a function that divides every pixel in the image by a constant c
+without using loops. This is particularly simple,
+
+\hypertarget{matlab-function}{%
+\paragraph{Matlab function:}\label{matlab-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function J = DivIbyConstNoLoops(I,c)}
+\NormalTok{    tic}
+\NormalTok{    J=uint8(double(I)/c);}
+\NormalTok{    toc}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+(Note the type conversions.) Load an image and run the function on it.
+Note the elapsed time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{merz\PYZus{}divided\PYZus{}loop = DivIbyConstLoops(merzouga, 2); }\PY{l+s+si}{\PYZpc{} lo}\PY{l+s+s1}{op version took 0.043690 seconds.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4(b) loop version: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{merz\PYZus{}divided\PYZus{}matmul = DivIbyConstNoLoops(merzouga, 2); }\PY{l+s+si}{\PYZpc{} lo}\PY{l+s+s1}{op version took 0.001388 seconds.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4(b) vectorized version: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+4(b) loop version: Elapsed time is 0.767492 seconds.
+4(b) vectorized version: Elapsed time is 0.001071 seconds.
+
+    \end{Verbatim}
+
+    4(b)
+
+What do the 2 times tell you about using loops in matlab?
+
+\hypertarget{answer-matlab-is-optimized-for-vectorized-operations-between-a-matrix-and-a-scalar.}{%
+\paragraph{Answer: Matlab is optimized for vectorized operations between
+a matrix and a
+scalar.}\label{answer-matlab-is-optimized-for-vectorized-operations-between-a-matrix-and-a-scalar.}}
+
+    5(a)(i)
+
+Write a function that outputs an image J made from input image I such
+that J(r,c,b) is the average of I(r,c,b) and the 8 pixels that surround
+it. Use three nested loops, over the bands, the rows, and the columns.
+
+In the function, record the size of I in the three scalars R, C, and B.
+Convert I to double. Allocate J as a zero image the same size as I. Loop
+over all B bands. So as not to go outside of I when constructing J, loop
+the rows from 2 to R-1 and the columns from 2 to C-1. That means the
+resulting J will have a 1-pixel wide band of zeros around it. Convert J
+to uint8.
+
+Surround outside loop with tic and toc so that when you run the function
+it tells you the amount of time it took to execute the loops.
+
+Load a truecolor image of your choice into Matlab . Run your function on
+it, note the time and display the image. Include your code, the size of
+the image, and the execution time in your report. You need not include
+the input image nor the output image.
+
+\hypertarget{matlab-function-loop-version}{%
+\paragraph{Matlab function: loop
+version:}\label{matlab-function-loop-version}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function average_image = getAverageImage_loop(original_image)}
+    \CommentTok{% Convert to double}
+\NormalTok{    original_image_float = double(original_image);}
+    \CommentTok{% Get sizes}
+\NormalTok{    [num_rows, num_cols, num_bands] = size(original_image_float);}
+    \CommentTok{% Allocate a zeros image}
+\NormalTok{    average_image = zeros(num_rows, num_cols, num_bands);}
+
+    \CommentTok{% Do the same thing on each band.}
+\NormalTok{    tic}
+\NormalTok{    for band = }\FloatTok{1}\NormalTok{:num_bands}
+        \CommentTok{% for all points in 2D, average 9-blocks. No edge cases.}
+\NormalTok{        for row = }\FloatTok{2}\NormalTok{:num_rows-}\FloatTok{1}
+\NormalTok{           for col = }\FloatTok{2}\NormalTok{:num_cols-}\FloatTok{1}
+\NormalTok{                average_image(row, col, band) = (original_image_float(row-}\FloatTok{1}\NormalTok{, col-}\FloatTok{1}\NormalTok{, band) ...}
+\NormalTok{                                                + original_image_float(row-}\FloatTok{1}\NormalTok{, col, band) ...}
+\NormalTok{                                                + original_image_float(row-}\FloatTok{1}\NormalTok{, col+}\FloatTok{1}\NormalTok{, band) ...}
+\NormalTok{                                                + original_image_float(row, col-}\FloatTok{1}\NormalTok{, band) ...}
+\NormalTok{                                                + original_image_float(row, col, band) ...}
+\NormalTok{                                                + original_image_float(row, col+}\FloatTok{1}\NormalTok{, band) ...}
+\NormalTok{                                                + original_image_float(row+}\FloatTok{1}\NormalTok{, col-}\FloatTok{1}\NormalTok{, band) ...}
+\NormalTok{                                                + original_image_float(row+}\FloatTok{1}\NormalTok{, col, band) ...}
+\NormalTok{                                                + original_image_float(row+}\FloatTok{1}\NormalTok{, col+}\FloatTok{1}\NormalTok{, band)) / }\FloatTok{9.0}\NormalTok{;}
+\NormalTok{           end}
+\NormalTok{        end}
+\NormalTok{    end}
+\NormalTok{    toc}
+\NormalTok{    average_image = uint8(average_image);}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{matlab-function-vectorized-version}{%
+\paragraph{Matlab function: vectorized
+version:}\label{matlab-function-vectorized-version}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function average_image = getAverageImage_vec(I)}
+    \CommentTok{% Convert to double}
+\NormalTok{    I = double(I);}
+    
+    \CommentTok{% Get sizes}
+\NormalTok{    [R, C, B] = size(I);}
+    
+\NormalTok{    average_image = zeros(R, C, B);}
+\NormalTok{    tic}
+\NormalTok{    average_image = (I + ... }\CommentTok{% original}
+\NormalTok{                    [zeros(}\FloatTok{1}\NormalTok{,C,B); I(}\FloatTok{1}\NormalTok{:R-}\FloatTok{1}\NormalTok{,:,:)] + ... }\CommentTok{% down}
+\NormalTok{                    [I(}\FloatTok{2}\NormalTok{:R,:,:); zeros(}\FloatTok{1}\NormalTok{,C,B)] + ... }\CommentTok{% up}
+\NormalTok{                    [zeros(R,}\FloatTok{1}\NormalTok{,B) I(:,}\FloatTok{1}\NormalTok{:C-}\FloatTok{1}\NormalTok{,:)] + ... }\CommentTok{% right}
+\NormalTok{                    [I(:,}\FloatTok{2}\NormalTok{:C,:) zeros(R,}\FloatTok{1}\NormalTok{,B)] + ... }\CommentTok{% left}
+\NormalTok{                    [zeros(R, }\FloatTok{1}\NormalTok{, B) [zeros(}\FloatTok{1}\NormalTok{,C-}\FloatTok{1}\NormalTok{,B); I(}\FloatTok{1}\NormalTok{:R-}\FloatTok{1}\NormalTok{,}\FloatTok{1}\NormalTok{:C-}\FloatTok{1}\NormalTok{,:)]] + ... }\CommentTok{% down_right}
+\NormalTok{                    [[zeros(}\FloatTok{1}\NormalTok{,C-}\FloatTok{1}\NormalTok{,B); I(}\FloatTok{1}\NormalTok{:R-}\FloatTok{1}\NormalTok{,}\FloatTok{2}\NormalTok{:C,:)] zeros(R, }\FloatTok{1}\NormalTok{, B)] + ... }\CommentTok{% down_left}
+\NormalTok{                    [zeros(R, }\FloatTok{1}\NormalTok{, B) [I(}\FloatTok{2}\NormalTok{:R,}\FloatTok{1}\NormalTok{:C-}\FloatTok{1}\NormalTok{,:); zeros(}\FloatTok{1}\NormalTok{,C-}\FloatTok{1}\NormalTok{,B)]] + ... }\CommentTok{% up_right}
+\NormalTok{                    [[I(}\FloatTok{2}\NormalTok{:R,}\FloatTok{2}\NormalTok{:C,:); zeros(}\FloatTok{1}\NormalTok{,C-}\FloatTok{1}\NormalTok{,B)] zeros(R, }\FloatTok{1}\NormalTok{, B)]) / }\FloatTok{9.0}\NormalTok{; }\CommentTok{% up_left}
+\NormalTok{                    average_image([}\FloatTok{1}\NormalTok{, R], :, :) = }\FloatTok{0}\NormalTok{;}
+\NormalTok{                    average_image(:, [}\FloatTok{1}\NormalTok{, C], :) = }\FloatTok{0}\NormalTok{;}
+\NormalTok{    toc}
+\NormalTok{    average_image = uint8(average_image);}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+    Repeat the two methods serveral times to get a typical execution time.
+Were the results what you expected? Explain why the results might be so
+
+\hypertarget{answer-on-average-the-loop-implementation-took-0.021786-seconds-while-the-vectoized-one-took-0.083131-seconds.-these-results-surprised-me-because}{%
+\paragraph{Answer: On average, the loop implementation took 0.021786
+seconds, while the vectoized one took 0.083131 seconds. These results
+surprised me,
+because}\label{answer-on-average-the-loop-implementation-took-0.021786-seconds-while-the-vectoized-one-took-0.083131-seconds.-these-results-surprised-me-because}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loop = getAverageImage\PYZus{}loop(I);}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5(a)(i) loop version: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vec = getAverageImage\PYZus{}vec(I);}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5(a)(ii) vectorized version: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5(a)(i) loop version: Elapsed time is 0.022869 seconds.
+5(a)(ii) vectorized version: Elapsed time is 0.104358 seconds.
+
+    \end{Verbatim}
+
+    5(b)
+
+Write two functions that accept an M x N matrix and output as L2
+distance matrix. Assume that the input matrix contains N M-vectos (each
+column is a vector). The distance matrix will be N x N. Element (i, j)
+contains the L2 (a.k.a. Euclidean) distance between the ith and jth
+vectors in the input matrix.
+
+The first program should be written using loops. Note that there are
+symmetries in the resultant matrix that can be exploited to reduce
+execution time.
+
+\hypertarget{matlab-function-loop-version}{%
+\paragraph{Matlab function: loop
+version:}\label{matlab-function-loop-version}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function D2 = getL2Dist_loop(A)}
+\NormalTok{    tic}
+\NormalTok{    n = size(A, }\FloatTok{2}\NormalTok{);}
+\NormalTok{    D2 = zeros(n, n);}
+\NormalTok{    for r = }\FloatTok{1}\NormalTok{:n}
+\NormalTok{        for c = (r+}\FloatTok{1}\NormalTok{):n}
+\NormalTok{            diff = A(:,r)-A(:,c);}
+\NormalTok{            D2(r,c) = sqrt(diff'*diff);}
+\NormalTok{            if r == }\FloatTok{1000}\NormalTok{ && c == }\FloatTok{11}
+\NormalTok{                fprintf(}\StringTok{'(1000, 11): diff = %s, D2(1000, 11) = %f'}\NormalTok{, mat2str(diff), D2(r,c));}
+\NormalTok{            end}
+\NormalTok{        end}
+\NormalTok{    end}
+\NormalTok{    D2 = D2 + D2';}
+\NormalTok{    toc}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+The second program should use no loops. That can be accomplished using
+bsxfun, but there may be other ways. Consider computing the distance
+matrix using the expansion of the L2 distance into an expression in
+terms of L2 inner products. I.e., \textbar{}\textbar{}xi
+x\textbar{}j\textbar{}\textbar{} = `??'
+
+\hypertarget{matlab-function-vectorized-version}{%
+\paragraph{Matlab function: vectorized
+version:}\label{matlab-function-vectorized-version}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{function D2 = getL2Dist_vec(A)}
+\NormalTok{    tic}
+\NormalTok{    D2 = sqrt(bsxfun(@plus,sum(A.^}\FloatTok{2}\NormalTok{)',bsxfun(@plus,sum(A.^}\FloatTok{2}\NormalTok{),-}\FloatTok{2}\NormalTok{*(A'*A))));}
+\NormalTok{    toc}
+\NormalTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+Compare the execution times of the two on a random 10 x 1000 matrix
+using tic and toc. Compare thos results to that of the Matlab built-in
+pdist() from the statistics toolbox. Repeat all three several times to
+get a typical time. Were the results what you expected? Explain why the
+results might be so.
+
+\hypertarget{answer-looped-version-takes-0.063182-seconds.-vectorized-0.005860-seconds-and-pdist-0.013539-seconds.}{%
+\paragraph{Answer: looped version takes 0.063182 seconds. vectorized
+0.005860 seconds, and pdist 0.013539
+seconds.}\label{answer-looped-version-takes-0.063182-seconds.-vectorized-0.005860-seconds-and-pdist-0.013539-seconds.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rando = randi([0, 255], 10, 1000);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZus{}loop = getL2Dist\PYZus{}loop(rando);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5(b) loop version: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZus{}vec = getL2Dist\PYZus{}vec(rando);}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5(b) vectorized version: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{clean\PYZus{}buffers}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{err}\PY{p}{)}
+          \PY{n}{eng}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tic; D\PYZus{}pdist = squareform(pdist(rando}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{)); toc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nargout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stdout}\PY{o}{=}\PY{n}{out}\PY{p}{,} \PY{n}{stderr}\PY{o}{=}\PY{n}{err}\PY{p}{)}
+          \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5(b) pdist version: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{out}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5(b) loop version: Elapsed time is 0.076565 seconds.
+5(b) vectorized version: Elapsed time is 0.010103 seconds.
+5(b) pdist version: Elapsed time is 0.019516 seconds.
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
